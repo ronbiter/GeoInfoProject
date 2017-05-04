@@ -25,7 +25,12 @@ app.controller('NavCtrl', function ($scope) {
         maxZoom: 20
     }).addTo($scope.myMap);
 
-    console.log($scope.myMap.options.zoom)
+    L.Routing.control({
+        waypoints: [
+            $scope.myMap.getCenter(),
+            L.latLng(31.794689, 34.645889)
+        ]
+    }).addTo($scope.myMap);
 
     $scope.waypoint = {
         lat : 31.794696,
