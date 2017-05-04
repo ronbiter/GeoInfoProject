@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="412fd1d3-edf6-4b15-b016-92cf734e8dd8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyScripts/Controllers.js" afterPath="$PROJECT_DIR$/MyScripts/Controllers.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,8 +47,8 @@
       <file leaf-file-name="Controllers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyScripts/Controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="30" column="41" lean-forward="false" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+            <state relative-caret-position="594">
+              <caret line="29" column="119" lean-forward="false" selection-start-line="29" selection-start-column="119" selection-end-line="29" selection-end-column="119" />
               <folding>
                 <element signature="e#0#38#0" expanded="false" />
               </folding>
@@ -361,7 +362,7 @@
       <option name="presentableId" value="Default" />
       <updated>1493187769336</updated>
       <workItem from="1493187771451" duration="1085000" />
-      <workItem from="1493652942537" duration="34045000" />
+      <workItem from="1493652942537" duration="34337000" />
     </task>
     <task id="LOCAL-00001" summary="fts app version 1.0">
       <created>1493835552959</created>
@@ -405,11 +406,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493925303744</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fts app version 1.0">
+      <created>1493925330751</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1493925330751</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35130000" />
+    <option name="totallyTimeSpent" value="35422000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -630,8 +638,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyScripts/Controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="30" column="41" lean-forward="false" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+        <state relative-caret-position="594">
+          <caret line="29" column="119" lean-forward="false" selection-start-line="29" selection-start-column="119" selection-end-line="29" selection-end-column="119" />
           <folding>
             <element signature="e#0#38#0" expanded="false" />
           </folding>
