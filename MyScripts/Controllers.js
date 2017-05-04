@@ -27,8 +27,8 @@ app.controller('NavCtrl', function ($scope) {
 
     L.Routing.control({
         waypoints: [
-            L.latLng(31.794689, 34.645889), // $scope.myMap.getCenter(), <-- this is for getting the current map center
-            L.latLng(31.794689, 34.645889)
+            L.latLng(31.794696, 34.645896), // $scope.myMap.getCenter(), <-- this is for getting the current map center
+            L.latLng(31.681742, 34.746419)
         ]
     }).addTo($scope.myMap);
 
