@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="412fd1d3-edf6-4b15-b016-92cf734e8dd8" name="Default" comment="fts app version 1.0">
+    <list default="true" id="412fd1d3-edf6-4b15-b016-92cf734e8dd8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Index.html" afterPath="$PROJECT_DIR$/Index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyScripts/Controllers.js" afterPath="$PROJECT_DIR$/MyScripts/Controllers.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -363,7 +361,7 @@
       <option name="presentableId" value="Default" />
       <updated>1493187769336</updated>
       <workItem from="1493187771451" duration="1085000" />
-      <workItem from="1493652942537" duration="34012000" />
+      <workItem from="1493652942537" duration="34045000" />
     </task>
     <task id="LOCAL-00001" summary="fts app version 1.0">
       <created>1493835552959</created>
@@ -400,11 +398,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493923890369</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fts app version 1.0">
+      <created>1493925303744</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1493925303744</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35097000" />
+    <option name="totallyTimeSpent" value="35130000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
