@@ -17,7 +17,8 @@ app.controller('NavCtrl', function ($scope) {
     });
 
     $scope.myMap.locate({
-        setView: true
+        setView: true,
+        watch: true
     })
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9uYml0ZXIiLCJhIjoiY2oyYTk2dW1tMDAwZTJ3bnR2d3FiMGZwYyJ9.Q7Lw7hFupsK69ZbVP0VV2w', {
