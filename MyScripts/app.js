@@ -1,7 +1,7 @@
 /**
  * Created by ron on 5/1/2017.
  */
-var app = angular.module('FtsApp',  ['ngRoute', 'FtsApp.Controllers', 'leaflet-directive']);
+var app = angular.module('FtsApp',  ['ngRoute', 'FtsApp.Controllers']);
 
 app.config(function ($routeProvider, $locationProvider) {
 
@@ -21,4 +21,5 @@ app.config(function ($routeProvider, $locationProvider) {
         $('.nav').find('.active').removeClass('active');
         $(this).parent().addClass('active');
     });
+
 })
