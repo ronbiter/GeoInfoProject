@@ -16,14 +16,17 @@ app.controller('NavCtrl', function ($scope) {
         zoom: 15
     });
 
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9uYml0ZXIiLCJhIjoiY2oyYTk2dW1tMDAwZTJ3bnR2d3FiMGZwYyJ9.Q7Lw7hFupsK69ZbVP0VV2w', {
+        maxZoom: 18
+    }).addTo($scope.myMap);
+
     $scope.myMap.locate({
         setView: true,
         watch: true
     })
 
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9uYml0ZXIiLCJhIjoiY2oyYTk2dW1tMDAwZTJ3bnR2d3FiMGZwYyJ9.Q7Lw7hFupsK69ZbVP0VV2w', {
-        maxZoom: 20
-    }).addTo($scope.myMap);
+
 
     L.Routing.control({
         waypoints: [
@@ -31,6 +34,9 @@ app.controller('NavCtrl', function ($scope) {
             L.latLng(31.681742, 34.746419)
         ]
     }).addTo($scope.myMap);
+
+    console.log($scope.myMap.getCenter())
+
 
     $scope.waypoint = {
         lat: 31.794696,
