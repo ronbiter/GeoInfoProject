@@ -22,10 +22,17 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
+app.set('view engine', 'html');
+
 // define model =================
 var Navs = mongoose.model('Navs', {
     nav : Object
 });
+
+// routes ================
+app.get('/', function (req, res) {
+    res.render('/Index');
+})
 
 // listen (start app with node server.js) ======================================
 app.listen(3000);
