@@ -1,7 +1,7 @@
 /**
  * Created by ron on 5/1/2017.
  */
-var app = angular.module('FtsApp',  ['ngRoute', 'FtsApp.Controllers']);
+var app = angular.module('FtsApp',  ['ngRoute', 'ngCookies', 'FtsApp.Controllers', 'FtsApp.Services']);
 
 app.config(function ($routeProvider, $locationProvider) {
 

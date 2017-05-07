@@ -11,8 +11,9 @@ var bodyParser = require('body-parser');    // pull information from HTML POST (
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
 // configuration =================
+// 'mongodb://ronbiter:rb171290!@ftscluster-shard-00-00-pgdhp.mongodb.net:27017,ftscluster-shard-00-01-pgdhp.mongodb.net:27017,ftscluster-shard-00-02-pgdhp.mongodb.net:27017/admin?ssl=true&replicaSet=FTSCluster-shard-0&authSource=admin'
 // 'mongodb://ronbiter:rb171290@ds127101.mlab.com:27101/fts'
-mongoose.connect('mongodb://localhost');     // connect to mongoDB database on modulus.io
+mongoose.connect('mongodb://ronbiter:rb171290@ftscluster-shard-00-00-pgdhp.mongodb.net:27017,ftscluster-shard-00-01-pgdhp.mongodb.net:27017,ftscluster-shard-00-02-pgdhp.mongodb.net:27017/admin?ssl=true&replicaSet=FTSCluster-shard-0&authSource=admin');     // connect to mongoDB database on modulus.io
 
 app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
@@ -21,6 +22,11 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
+// define model =================
+var Navs = mongoose.model('Navs', {
+    nav : Object
+});
+
 // listen (start app with node server.js) ======================================
 app.listen(3000);
-console.log("App listening on port 8080");
+console.log("App listening on port 3000");

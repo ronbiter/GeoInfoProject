@@ -1,14 +1,16 @@
 {
   "name": "fts-app",
   "version": "0.0.1",
-  "description"  : "GIS project for school, fuel transportation system.",
-  "main"         : "server.js",
-  "author"       : "ron",
-  "dependencies" : {
-    "body-parser"    : "^1.4.3",
-    "express"        : "^4.13.4",
+  "description": "GIS project for school, fuel transportation system.",
+  "main": "server.js",
+  "author": "ron",
+  "dependencies": {
+    "angular-cookies": "^1.6.4",
+    "body-parser": "^1.4.3",
+    "express": "^4.13.4",
     "method-override": "^2.1.3",
-    "mongoose"       : "^4.4.12",
-    "morgan"         : "^1.1.1"
+    "mongodb": "^2.2.26",
+    "mongoose": "^4.4.12",
+    "morgan": "^1.1.1"
   }
 }
