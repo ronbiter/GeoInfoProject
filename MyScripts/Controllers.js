@@ -31,9 +31,23 @@ app.controller('NavCtrl', function ($scope) {
     L.Routing.control({
         waypoints: [
             L.latLng(31.794696, 34.645896), // $scope.myMap.getCenter(), <-- this is for getting the current map center
-            L.latLng(31.681742, 34.746419)
-        ]
-    }).addTo($scope.myMap);
+            L.latLng(31.784071, 34.673281),
+            L.latLng(31.766121, 34.666414),
+            L.latLng(31.750431, 34.682443),
+            L.latLng(31.794696, 34.645896)
+        ],
+    })
+    .on('routesfound', function(e) {
+        var routes = e.routes;
+        if(routes.length > 0) {
+            console.log("total distance:" + routes[0].summary.totalDistance / 1000 + "km")
+            console.log("waypoints")
+        }
+        console.log(routes);
+    })
+    .addTo($scope.myMap);
+
+    console.log();
 
     console.log($scope.myMap.getCenter())
 
