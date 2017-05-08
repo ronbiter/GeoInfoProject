@@ -9,8 +9,6 @@ app.controller('MainCtrl', function ($scope) {
 
 app.controller('NavCtrl', function ($scope) {
 
-
-
     $scope.myMap =  L.map('myMap', {
         center: [31.794696, 34.645896],
         zoom: 15
