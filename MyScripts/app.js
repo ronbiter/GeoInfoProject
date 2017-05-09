@@ -7,12 +7,20 @@ app.config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
         .when('/', {
-            templateUrl: 'Views/Dashboard.html',
-            controller: 'MainCtrl'
+            templateUrl: 'Views/Home.html',
+            //controller: 'UserCtrl'
          })
+        .when('/Dashboard', {
+            templateUrl: 'Views/Dashboard.html',
+            controller: 'DashboardCtrl'
+        })
         .when('/NavMap', {
             templateUrl: 'Views/NavMap.html',
             controller: 'NavCtrl'
+        })
+        .when('/Login', {
+            templateUrl: 'Views/Login.html',
+            controller: 'UserCtrl'
         })
 
     $locationProvider.hashPrefix('');
