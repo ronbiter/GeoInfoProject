@@ -22,7 +22,7 @@
     <script src="MyScripts/Services.js"></script>
 
 </head>
-<body>
+<body ng-controller="MainCtrl">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -37,9 +37,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="#Dashboard">Dashboard</a></li>
                 <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
+                <li ng-if="logedUser.name.length == 0"><a href="#Login">Login</a></li>
+                <li ng-if="logedUser.name.length > 0"><a href="#">{{logedUser.name}}</a></li>
                 <li><a href="#">Help</a></li>
             </ul>
             <form class="navbar-form navbar-right">
@@ -83,7 +84,7 @@
 
     <hr/>
     <footer>
-        &copy;  Ron Biterman
+        &copy;  RAS Projects
     </footer>
 
 </div>

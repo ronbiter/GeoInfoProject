@@ -3,6 +3,43 @@
  */
 var app = angular.module('FtsApp.Services', []);
 
-app.factory('FtsDataFactory', ['$http', '$cookies', function ($http, $cookies) {
-    
+app.service('FtsDataService', ['$http', '$cookies', function ($http, $cookies) {
+
+    this.user = {
+        name: '',
+        email: '',
+        password: '',
+        remember: false,
+        role: ''
+    };
+
+    this.Login = function (username, password, remember) {
+        // make an http GET request to get user data from server.
+
+        this.user.name = 'ron'
+        this.user.email = username;
+        this.user.password = password;
+        this.user.remember = remember;
+        this.user.role = 'admin';
+
+        if(remember) {
+            $cookies.putObject('logedUser', this.user);
+            console.log('logedUser cookie saved')
+        }
+        else {
+            var d = new Date();
+            d.setDate(d.getDate() + 1)
+            $cookies.putObject('logedUser', this.user, {
+                expires: d
+            });
+            console.log('logedUser cookie saved')
+        }
+
+        return this.user;
+    }
+
+    this.GetLogedUser = function () {
+        return this.user;
+    }
+
 }])
