@@ -22,6 +22,10 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'Views/Login.html',
             controller: 'UserCtrl'
         })
+        .when('/StationsMap', {
+            templateUrl: 'Views/StationsMap.html',
+            controller: 'NavCtrl'
+        })
 
     $locationProvider.hashPrefix('');
 

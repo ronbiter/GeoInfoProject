@@ -5,11 +5,7 @@ var app = angular.module('FtsApp.Controllers', ['ngRoute'])
 
 app.controller('MainCtrl', function ($scope, FtsDataService) {
 
-    $scope.logedUser = FtsDataService.GetLogedUser();
-
-    if($scope.logedUser.name != '') {
-
-    }
+    $scope.date = new Date(2017,10,5);
 
 })
 
@@ -21,31 +17,27 @@ app.controller('DashboardCtrl', function ($scope, FtsDataService) {
 
 app.controller('UserCtrl', function ($scope, $location, FtsDataService) {
 
-    $scope.user = {
-        name: '',
-        email: '',
-        password: '',
-        remember: false,
-        role: ''
-    }
+    $scope.user = FtsDataService.GetLogedUser();
+
+    //console.log($scope.user)
 
     $scope.Login = function () {
 
         $scope.user = FtsDataService.Login($scope.user.email, $scope.user.password, $scope.user.remember);
 
         if($scope.user != undefined) {
-            $location.url('/')
-            $window.location.reload();
+            $location.url('/');
+            console.log($scope.user.name);
         }
     }
 
     $scope.Logout = function() {
-        // [TODO] implement the logout function
+        $scope.user = FtsDataService.Logout();
     }
 
 })
 
-app.controller('NavCtrl', function ($scope) {
+app.controller('NavCtrl', function ($scope, $http) {
 
     // make a leaflet map object
     $scope.myMap =  L.map('myMap', {
@@ -59,36 +51,47 @@ app.controller('NavCtrl', function ($scope) {
     }).addTo($scope.myMap);
 
     // get the current location of the user.
-    $scope.myMap.locate({
-        setView: true,
-        watch: true
-    })
+    // $scope.myMap.locate({
+    //     setView: true,
+    //     watch: true
+    // })
+
+    $scope.getStations = function () {
+
+        console.log('geting stations')
+
+        var stations = {};
+
+        $http.get('/api/stations')
+            .then(function (response) {
+                console.log(response);
+            })
+
+    }
 
 
+    $scope.makRoute = function() {
 
-    L.Routing.control({
-        waypoints: [
-            L.latLng(31.794696, 34.645896), // $scope.myMap.getCenter(), <-- this is for getting the current map center
-            L.latLng(31.784071, 34.673281),
-            L.latLng(31.766121, 34.666414),
-            L.latLng(31.750431, 34.682443),
-            L.latLng(31.794696, 34.645896)
-        ],
-    })
-    .on('routesfound', function(e) {
-        var routes = e.routes;
-        if(routes.length > 0) {
-            console.log("total distance:" + routes[0].summary.totalDistance / 1000 + "km")
-            console.log("waypoints")
-        }
-        console.log(routes);
-    })
-    .addTo($scope.myMap);
+        L.Routing.control({
+            waypoints: [
+                L.latLng(31.794696, 34.645896), // $scope.myMap.getCenter(), <-- this is for getting the current map center
+                L.latLng(31.784071, 34.673281),
+                L.latLng(31.766121, 34.666414),
+                L.latLng(31.750431, 34.682443),
+                L.latLng(31.794696, 34.645896)
+            ],
+        })
+            .on('routesfound', function(e) {
+                var routes = e.routes;
+                if(routes.length > 0) {
+                    console.log("total distance:" + routes[0].summary.totalDistance / 1000 + "km")
+                    console.log("waypoints")
+                }
+                console.log(routes);
+            })
+            .addTo($scope.myMap);
 
-    console.log();
-
-    console.log($scope.myMap.getCenter())
-
+    }
 
     $scope.waypoint = {
         lat: 31.794696,

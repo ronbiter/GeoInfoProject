@@ -38,8 +38,30 @@ app.service('FtsDataService', ['$http', '$cookies', function ($http, $cookies) {
         return this.user;
     }
 
-    this.GetLogedUser = function () {
+    this.Logout = function() {
+
+        $cookies.remove('logedUser');
+
+        this.user = {
+            name: '',
+            email: '',
+            password: '',
+            remember: false,
+            role: ''
+        };
+
         return this.user;
+
+    }
+
+    this.GetLogedUser = function () {
+        var user = $cookies.getObject('logedUser');
+        if(user != undefined) {
+            return user;
+        }
+        else {
+            return this.user;
+        }
     }
 
 }])
