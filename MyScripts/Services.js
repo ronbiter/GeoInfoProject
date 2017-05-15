@@ -6,6 +6,7 @@ var app = angular.module('FtsApp.Services', []);
 app.service('FtsDataService', ['$http', '$cookies', function ($http, $cookies) {
 
     this.user = {
+        userId: '',
         name: '',
         email: '',
         password: '',
@@ -13,29 +14,47 @@ app.service('FtsDataService', ['$http', '$cookies', function ($http, $cookies) {
         role: ''
     };
 
-    this.Login = function (username, password, remember) {
+    this.Login = function (email, password, remember) {
         // make an http GET request to get user data from server.
 
-        this.user.name = 'ron'
-        this.user.email = username;
-        this.user.password = password;
-        this.user.remember = remember;
-        this.user.role = 'admin';
+        return $http.get('/api/User/Login?email=' + email + '&password=' + password + '&remember=' + remember)
+            .then(function (response) {
+                //console.log(response);
+                if(response.data != undefined) {
 
-        if(remember) {
-            $cookies.putObject('logedUser', this.user);
-            console.log('logedUser cookie saved')
-        }
-        else {
-            var d = new Date();
-            d.setDate(d.getDate() + 1)
-            $cookies.putObject('logedUser', this.user, {
-                expires: d
+                    console.log(response.data);
+
+                    this.user = response.data;
+
+                    if(this.user.remember) {
+                        $cookies.putObject('logedUser', this.user);
+                        console.log('logedUser cookie saved')
+                    }
+                    else {
+                        var d = new Date();
+                        d.setDate(d.getDate() + 1)
+                        $cookies.putObject('logedUser', this.user, {
+                            expires: d
+                        });
+                        console.log('logedUser cookie saved')
+                    }
+
+                    return this.user;
+                }
+
+                else {
+                    return undefined;
+                }
+
             });
-            console.log('logedUser cookie saved')
-        }
 
-        return this.user;
+        // this.user.name = 'ron'
+        // this.user.email = email;
+        // this.user.password = password;
+        // this.user.remember = remember;
+        // this.user.role = 'admin';
+
+
     }
 
     this.Logout = function() {

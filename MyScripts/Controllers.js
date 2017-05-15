@@ -15,7 +15,7 @@ app.controller('DashboardCtrl', function ($scope, FtsDataService) {
 
 })
 
-app.controller('UserCtrl', function ($scope, $location, FtsDataService) {
+app.controller('UserCtrl', function ($scope, $location, $window, FtsDataService) {
 
     $scope.user = FtsDataService.GetLogedUser();
 
@@ -23,12 +23,20 @@ app.controller('UserCtrl', function ($scope, $location, FtsDataService) {
 
     $scope.Login = function () {
 
-        $scope.user = FtsDataService.Login($scope.user.email, $scope.user.password, $scope.user.remember);
+        FtsDataService.Login($scope.user.email, $scope.user.password, $scope.user.remember)
+            .then(function (user) {
+                $scope.user = user;
 
-        if($scope.user != undefined) {
-            $location.url('/');
-            console.log($scope.user.name);
-        }
+                //console.log($scope.user);
+
+                if($scope.user != undefined) {
+                    $location.url('/');
+                    $window.location.reload();
+                    //console.log($scope.user.name);
+                }
+            })
+
+
     }
 
     $scope.Logout = function() {
@@ -64,7 +72,11 @@ app.controller('NavCtrl', function ($scope, $http) {
 
         $http.get('/api/stations')
             .then(function (response) {
-                console.log(response);
+                var cord = response.data[0].coords;
+                for(var i=0; i< cord.length; i++) {
+                    console.log(cord[i]);
+                }
+                console.log(response.data[0].coords);
             })
 
     }

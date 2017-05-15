@@ -32,6 +32,10 @@ var navPointsSchema = new mongoose.Schema({
     coords: [{ coordName: String, lat: Number, lng: Number}]
 });
 
+var userSchema = new mongoose.Schema({ url: String, text: String, id: Number}, { collection: 'Users'})
+
+var Users = mongoose.model('Users', userSchema);
+
 var NavPoints = mongoose.model('NavPoints', navPointsSchema);
 
 var navs = new NavPoints({
@@ -63,12 +67,41 @@ var navs = new NavPoints({
 // })
 
 // routes ================
-app.get('*', function (req, res) {
+app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname+'/index.html'));
 })
 
 
 // api ===================
+
+// user login logic
+app.get('/api/User/Login', function (req, res) {
+
+    Users.find({
+        email: req.query.email,
+        password: req.query.password
+    }, function (err, users) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+        {
+            console.log(err)
+            res.send(err)
+        }
+
+        //console.log(users);
+        // check we only got 1 user back (email and password match)
+        if(users.length == 1) {
+            // return the user as a json
+            users[0].remember = req.query.remember;
+            res.json(users[0]);
+        }
+        else {
+            res.json(undefined);
+        }
+    })
+
+});
 
 // get all stations nav points
 app.get('/api/stations', function (req, res) {
@@ -88,7 +121,7 @@ app.get('/api/stations', function (req, res) {
         }
 
 
-        console.log(navs);
+        //console.log(navs);
         res.json(navs); // return all navs in JSON format
     })
 })
