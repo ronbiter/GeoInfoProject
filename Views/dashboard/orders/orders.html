@@ -1,0 +1,49 @@
+<!-- [TODO] make an orders screen-->
+<h2 class="sub-header"> Orders </h2>
+
+<div layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate" ng-if="loading"></md-progress-circular>
+</div>
+
+<!--<div ui-grid="gridOptions" ui-grid-selection class="" ng-if="!loading"></div> ==> angular-ui-grid test...-->
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div ng-if="!loading" class="scrollit">
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Company</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Last Updated</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="order in ordersList">
+                        <td>{{order.orderID}}</td>
+                        <td>{{order.company}}</td>
+                        <td>{{order.priority}}</td>
+                        <td>{{order.status}}</td>
+                        <td>{{order.lastUpdate}}</td>
+                        <td>
+                            <button class="btn btn-primary" ng-click="openOrder(order.orderID)">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <md-tooltip md-autohide="true" md-direction="top">Open order</md-tooltip>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+    </div>
+</div>

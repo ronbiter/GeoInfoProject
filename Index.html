@@ -4,90 +4,142 @@
     <meta charset="UTF-8">
     <title>FTS App</title>
 
-    <script src="Scripts/jquery-3.2.1.js"></script>
-    <script src="Scripts/leaflet/leaflet.js"></script>
-    <script src="Scripts/Angular/angular.js"></script>
-    <script src="node_modules/angular-cookies/angular-cookies.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <script src="Scripts/leaflet-routing-machine-3.2.5/dist/leaflet-routing-machine.js"></script>
-
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="MyCss/Site.css">
+    <!-- ==================== -->
+    <!--   app dependencies   -->
+    <!-- ==================== -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/angular-ui-grid/ui-grid.css">
     <link rel="stylesheet" href="Scripts/leaflet/leaflet.css">
     <link rel="stylesheet" href="Scripts/leaflet-routing-machine-3.2.5/dist/leaflet-routing-machine.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="MyCss/font-awesome-4.7.0/css/font-awesome.min.css">
 
-    <script src="MyScripts/app.js"></script>
-    <script src="MyScripts/Controllers.js"></script>
-    <script src="MyScripts/Services.js"></script>
+
+    <!-- =================== -->
+    <!--   user custom css   -->
+    <!-- =================== -->
+    <link rel="stylesheet" href="MyCss/Site.css">
+
 
 </head>
-<body ng-controller="MainCtrl">
+<body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#Dashboard">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li ng-if="logedUser.name.length == 0"><a href="#Login">Login</a></li>
-                <li ng-if="logedUser.name.length > 0"><a href="#">{{logedUser.name}}</a></li>
-                <li><a href="#">Help</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
+<ui-view></ui-view>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview</a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#NavMap">NavMap</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item</a></li>
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
-                <li><a href="">More navigation</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
-            </ul>
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-header">-->
+            <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <!--<a class="navbar-brand" href="#">FTS</a>-->
+        <!--</div>-->
+        <!--<div id="navbar" class="navbar-collapse collapse">-->
+            <!--<ul class="nav navbar-nav navbar-right" ng-controller="userController">-->
+                <!--<li ng-if="user.role == 'admin'"><a href="#Dashboard">Dashboard</a></li>-->
+                <!--<li><a href="#">Settings</a></li>-->
+                <!--<li ng-if="user === undefined"><a href="#Login">Login</a></li>-->
+                <!--<li class="dropdown" ng-if="user !== undefined">-->
+                    <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}} <span class="caret"></span></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li><a href="#">Profile</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a href="#" ng-click="Logout()">Logout</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li><a href="#">Help</a></li>-->
+            <!--</ul>-->
+            <!--<form class="navbar-form navbar-right">-->
+                <!--<input type="text" class="form-control" placeholder="Search...">-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
 
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<!--<div class="container-fluid">-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-3 col-md-2 sidebar">-->
+            <!--<ul class="nav nav-sidebar">-->
+                <!--<li ui-sref-active="active"><a ui-sref="">Overview</a></li>-->
+                <!--<li><a href="#">Orders</a></li>-->
+                <!--<li><a href="#">Analytics</a></li>-->
+                <!--<li><a ui-sref="GeneralMap">General Stations Map</a></li>-->
+            <!--</ul>-->
+            <!--<ul class="nav nav-sidebar">-->
+                <!--<li><a ui-sref="StationsMap">Navigation</a></li>-->
+                <!--<li><a href="">Nav item again</a></li>-->
+                <!--<li><a href="">One more nav</a></li>-->
+                <!--<li><a href="">Another nav item</a></li>-->
+                <!--<li><a href="">More navigation</a></li>-->
+            <!--</ul>-->
+            <!--<ul class="nav nav-sidebar">-->
+                <!--<li><a href="">Nav item again</a></li>-->
+                <!--<li><a href="">One more nav</a></li>-->
+                <!--<li><a href="">Another nav item</a></li>-->
+            <!--</ul>-->
 
-            <ng-view></ng-view>
+        <!--</div>-->
+        <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
 
-        </div>
-    </div>
+            <!--<ui-view></ui-view>-->
+
+        <!--</div>-->
+    <!--</div>-->
 
 
 
-    <hr/>
-    <footer>
-        &copy;  RAS Projects
-    </footer>
+    <!--<hr/>-->
+    <!--<footer>-->
+        <!--&copy; {{ date | date:'MMM y' }} - RAS Projects-->
+    <!--</footer>-->
 
-</div>
+<!--</div>-->
+
+<!-- ==================== -->
+<!--   app dependencies   -->
+<!-- ==================== -->
+<script src="Scripts/jquery-3.2.1.js"></script>
+<script src="Scripts/Angular/angular.min.js"></script>
+<script src="node_modules/angular-aria/angular-aria.min.js"></script>
+<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="Scripts/leaflet/leaflet.js"></script>
+<script src="node_modules/angular-cookies/angular-cookies.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+<script src="Scripts/leaflet-routing-machine-3.2.5/dist/leaflet-routing-machine.js"></script>
+<script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=yn5ao5Ac2BmJsCMJCXWAiyXXcOdQQEXs"></script>
+<script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-geocoding.js?key=yn5ao5Ac2BmJsCMJCXWAiyXXcOdQQEXs"></script>
+<script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=yn5ao5Ac2BmJsCMJCXWAiyXXcOdQQEXs"></script>
+<script src="node_modules/ngstorage/ngStorage.js"></script>
+<script src="node_modules/angular-ui-grid/ui-grid.js"></script>
+<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="node_modules/angular-material/angular-material.min.js"></script>
+
+<!-- ==================== -->
+<!-- user custom scripts  -->
+<!-- ==================== -->
+
+<script src="MyScripts/app.js"></script>
+<script src="MyScripts/config.js"></script>
+
+<script src="Views/home/home.controller.js"></script>
+
+<script src="Views/User/user.controller.js"></script>
+<script src="Views/User/login/login.controller.js"></script>
+
+<script src="Views/navigation/navigation.controller.js"></script>
+<script src="Views/navigation/GeneralMap/generalMap.controller.js"></script>
+<script src="Views/navigation/routeMap/routeMap.controller.js"></script>
+
+<script src="Views/dashboard/dashboard.factory.js"></script>
+<script src="Views/dashboard/stations/stations.factory.js"></script>
+<script src="Views/dashboard/orders/orders.factory.js"></script>
+<script src="Views/dashboard/dashboard.controller.js"></script>
+<script src="Views/dashboard/stations/stations.controller.js"></script>
+<script src="Views/dashboard/orders/orders.controller.js"></script>
 
 </body>
 </html>

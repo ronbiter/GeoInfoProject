@@ -1,0 +1,35 @@
+<h2 class="sub-header">Stations</h2>
+<div layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate" ng-if="loading"></md-progress-circular>
+</div>
+<!--<div ui-grid="gridOptions" class="" ng-if="!loading"></div>-->
+
+<div ng-if="!loading" class="scrollit">
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Company</th>
+            <th>City</th>
+            <th>Street</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="station in stationsList">
+            <td>{{station.stationId}}</td>
+            <td>{{station.name}}</td>
+            <td>{{station.company}}</td>
+            <td>{{station.address.city}}</td>
+            <td>{{station.address.street}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="GoToStation(station.stationId)">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <md-tooltip md-autohide="true" md-direction="top">Go to stations</md-tooltip>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
