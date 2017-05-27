@@ -25,54 +25,37 @@ app.use(methodOverride());
 
 app.set('view engine', 'html');
 
-// define model =================
-var navPointsSchema = new mongoose.Schema({
-    name: String,
-    type: String,
-    coords: [{ coordName: String, lat: Number, lng: Number}]
-});
+// define models and schemas =================
 
+// =======================
+// schemas ===============
+// =======================
 var userSchema = new mongoose.Schema({ url: String, text: String, id: Number}, { collection: 'Users'})
+var fuelStationSchema = new mongoose.Schema({ url: String, text: String, id: Number}, { collection: 'FuelStations'})
+var ordersSchema = new mongoose.Schema({ url: String, text: String, id: Number}, { collection: 'Orders'})
 
+
+
+
+// =======================
+// models ================
+// =======================
 var Users = mongoose.model('Users', userSchema);
+var FuelStations = mongoose.model('FuelStations', fuelStationSchema)
+var Orders = mongoose.model('Orders', ordersSchema)
 
-var NavPoints = mongoose.model('NavPoints', navPointsSchema);
 
-var navs = new NavPoints({
-    name: 'Delek Nav Points',
-    type: 'NavPointsList',
-    coords: [
-        {
-            coordName: 'tahana 1',
-            lat: 31.794696,
-            lng: 34.645896
-        },
-        {
-            coordName: 'tahana 2',
-            lat: 31.784071,
-            lng: 34.673281
-        },
-        {
-            coordName: 'tahana 3',
-            lat: 31.766121,
-            lng: 34.666414
-        }
-    ]
-})
 
-// navs.save(function (err) {
-//     if (err) return handleError(err);
-//     // saved!
-//     console.log('navs model saved')
-// })
-
+// =======================
 // routes ================
+// =======================
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname+'/index.html'));
 })
 
-
+// =======================
 // api ===================
+// =======================
 
 // user login logic
 app.get('/api/User/Login', function (req, res) {
@@ -106,12 +89,10 @@ app.get('/api/User/Login', function (req, res) {
 // get all stations nav points
 app.get('/api/stations', function (req, res) {
 
-    //[TODO] this is still not working correctly, it returns an html page instead of the json response.
+    console.log("searching db for stations");
 
-    console.log("searching db");
-
-    // use mongoose to get all navs in the database
-    NavPoints.find(function (err, navs) {
+    // use mongoose to get all stations in the database
+    FuelStations.find(function (err, navs) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
@@ -126,6 +107,29 @@ app.get('/api/stations', function (req, res) {
     })
 })
 
+app.get('/api/orders', function (req, res) {
+
+    console.log("searching db for ordes");
+
+    // use mongoose to get all orders in the database
+    Orders.find(function (err, orders) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+        {
+            console.log(err)
+            res.send(err)
+        }
+
+
+        //console.log(orders);
+        res.json(orders); // return all navs in JSON format
+    })
+})
+
+
+// ======================= // ======================= // =======================
 // listen (start app with node server.js) ======================================
+// ======================= // ======================= // =======================
 app.listen(3000);
 console.log("App listening on port 3000");
