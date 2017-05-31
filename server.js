@@ -86,7 +86,7 @@ app.get('/api/User/Login', function (req, res) {
 
 });
 
-// get all stations nav points
+// get all stations
 app.get('/api/stations', function (req, res) {
 
     console.log("searching db for stations");
@@ -107,6 +107,36 @@ app.get('/api/stations', function (req, res) {
     })
 })
 
+// get station by id
+app.get('/api/stations/station', function (req, res) {
+
+    var p = parseInt(req.query.stationId);
+    FuelStations.find({
+        stationId: p
+    }, function (err, station) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+        {
+            console.log(err)
+            res.send(err)
+        }
+
+        //console.log(station);
+
+        // check we only got 1 order back
+        if(station.length == 1) {
+            // return the order as a json
+            res.json(station[0]);
+        }
+        else {
+            res.json(undefined);
+        }
+    })
+
+});
+
+// get all orders
 app.get('/api/orders', function (req, res) {
 
     console.log("searching db for ordes");
@@ -126,6 +156,95 @@ app.get('/api/orders', function (req, res) {
         res.json(orders); // return all navs in JSON format
     })
 })
+
+// get order by id
+app.get('/api/orders/order', function (req, res) {
+
+    var p = parseInt(req.query.orderID);
+    Orders.find({
+        orderID: p
+    }, function (err, orders) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+        {
+            console.log(err)
+            res.send(err)
+        }
+
+        //console.log(orders);
+
+        // check we only got 1 order back
+        if(orders.length == 1) {
+            // return the order as a json
+            res.json(orders[0]);
+        }
+        else {
+            res.json(undefined);
+        }
+    })
+
+});
+
+// update order
+app.post('/api/orders/updateOrder', function (req, res) {
+    var p = req.body.params.order;
+    Orders.find({
+        orderID: p.orderID
+    }, function (err, orders) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            console.log(err)
+            res.send(err)
+        }
+        console.log(orders.length)
+        // check we only got 1 order back
+        if(orders.length == 1) {
+            orders[0].priority = p.priority;
+            orders[0].status = p.status;
+            orders[0].lastUpdate = new Date();
+            orders[0].assignedTo = p.assignedTo;
+            //console.log(orders);
+
+            orders[0].save(function (err, updatedOrder) {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                }
+                console.log('updated order:');
+                console.log(updatedOrder);
+                res.json(updatedOrder);
+            });
+        }
+        else {
+            res.json(undefined);
+        }
+    })
+});
+
+// get all drivers
+app.get('/api/drivers', function (req, res) {
+
+    console.log("searching db for drivers");
+
+    // use mongoose to get all stations in the database
+    Users.find(
+        { role:'driver' },
+        function (err, drivers) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+        {
+            console.log(err)
+            res.send(err)
+        }
+
+
+        //console.log(navs);
+        res.json(drivers); // return all navs in JSON format
+    });
+});
 
 
 // ======================= // ======================= // =======================

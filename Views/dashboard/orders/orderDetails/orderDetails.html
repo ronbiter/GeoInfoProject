@@ -1,0 +1,119 @@
+
+        <div layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate" ng-if="loading"></md-progress-circular>
+        </div>
+<!-- [TODO - there is a bug in the dahsboard, everything is gray, see how to fix that-->
+        <div md-whiteframe="4">
+
+
+            <md-toolbar class="md-primary">
+                <div class="md-toolbar-tools">
+                    <h2>Order #{{selectedOrder.orderID}}</h2>
+                    <span flex></span>
+                    <md-switch ng-model="isEditOrder" class="md-warn">
+                        <md-tooltip md-autohide="true" md-direction="top">Switch Edit</md-tooltip>
+                    </md-switch>
+                    <md-button
+                            class="md-icon-button"
+                            aria-label="Favorite"
+                            ng-click="closeOrder()">
+                        <md-icon class="glyphicon glyphicon-remove"></md-icon>
+                        <md-tooltip md-autohide="true" md-direction="top">Close order</md-tooltip>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-content layout-padding>
+                <form>
+
+                <div layout="row">
+                    <div layout="column" flex>
+                        <div layout="row" layout-padding layout-margin>
+                            <md-input-container class="form-group" flex>
+                                <label for="companyInput">Company</label>
+                                <input type="text" id="companyInput"
+                                       ng-model="selectedOrder.company" disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label for="lastUpdateInput">Last Update</label>
+                                <md-datepicker id="lastUpdateInput"
+                                               ng-model="selectedOrder.lastUpdate" disabled></md-datepicker>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-padding layout-margin>
+                            <md-input-container class="form-group" flex>
+                                <label for="priorityInput">Priority</label>
+                                <md-select type="text" id="priorityInput" required
+                                       ng-model="selectedOrder.priority" ng-disabled="!isEditOrder">
+                                    <md-option ng-repeat="priority in priorities" ng-value="priority.id">
+                                        {{priority.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label for="statusInput">Status</label>
+                                <input id="statusInput" required
+                                       ng-model="selectedOrder.status" disabled/>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-padding layout-margin>
+                            <md-input-container flex="50">
+                                <label for="assignedTo">Assigned To</label>
+                                <input  id="assignedTo" required
+                                        ng-model="selectedOrder.assignedTo" disabled>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div layout="column" flex="30">
+                        <md-input-container flex="20">
+                            <label>Assign To</label>
+                            <md-select ng-model="selectedOrder.assignedTo"  ng-disabled="!isEditOrder">
+                                <md-option ng-repeat="driver in drivers" ng-value="driver.userId">
+                                    {{driver.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-button flex="20" type="submit" class="md-raised md-primary"
+                                   ng-if="selectedOrder.status=='review'" ng-click="confirmOrder()">
+                            Confirm
+                        </md-button>
+                        <md-button flex="20" type="submit" class="md-raised md-primary"
+                                   ng-if="selectedOrder.status=='active'" ng-click="shipOutOrder()">
+                            Ship out
+                        </md-button>
+
+                    </div>
+                </div>
+                </form>
+
+                <div layout="row" layout-padding>
+                    <!-- stations table -->
+                    <div flex>
+                        <label for="stationsTable">Stations</label>
+                        <div class="table-responsive table-hover" id="stationsTable">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>City</th>
+                                    <th>Street</th>
+                                    <th>Has 98</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="station in orderStations">
+                                    <td>{{station.name}}</td>
+                                    <td>{{station.address.city}}</td>
+                                    <td>{{station.address.street}}</td>
+                                    <td ng-if="station.services.gas98"><i class="glyphicon glyphicon-check"></i></td>
+                                    <td ng-if="!station.services.gas98"><i class="glyphicon glyphicon-unchecked"></i></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </md-content>
+        </div>
+

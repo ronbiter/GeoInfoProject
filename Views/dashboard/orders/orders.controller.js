@@ -3,11 +3,12 @@
 
     angular.module('FtsApp').controller('ordersController', ordersController);
 
-    function ordersController ($scope, ordersFactory) {
+    function ordersController ($scope, $location, ordersFactory) {
 
         // [TODO] continue the controller
 
         $scope.ordersList = [];
+        $scope.selectedOrder = {};
 
         $scope.getOrdersList = function() {
 
@@ -26,7 +27,7 @@
 
         $scope.openOrder = function (orderId) {
 
-
+            $location.url('/home/dashboard/dashboardOrders/order/' + orderId);
 
         }
 

@@ -20,12 +20,20 @@
                             return undefined;
 
                     });
+            },
+
+            GetStationById: function (stationId) {
+
+                return $http.get('api/stations/station?stationId=' + stationId)
+                    .then(function (response) {
+
+                        return response.data;
+
+                    });
+
             }
 
         }
 
-
-
     })
-
 })();

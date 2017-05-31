@@ -50,7 +50,13 @@
                 url: '/dashboardOrders',
                 templateUrl: 'Views/dashboard/orders/orders.html',
                 controller: 'ordersController'
-            };
+        };
+
+        var selectedOrdersState = {
+            url: '/order/:orderID',
+            templateUrl: 'Views/dashboard/orders/orderDetails/orderDetails.html',
+            controller: 'orderDetilsController'
+        };
 
         var generalMapState = {
             url: '/generalMap',
@@ -78,6 +84,7 @@
             .state('home.dashboard', dashboardState)
             .state('home.dashboard.stations', stationsState)
             .state('home.dashboard.orders', ordersState)
+            .state('home.dashboard.orders.order', selectedOrdersState)
             .state('home.generalMap', generalMapState)
             .state('home.routeMap', routeMapState)
             .state('home.login', loginState);
