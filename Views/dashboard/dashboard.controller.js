@@ -14,7 +14,7 @@
 
         $scope.$watch('selectedIndex', function(current, old){
             previous = selected;
-            selected = tabs[current];
+            selected = $scope.tabs[current];
         });
     }
 })();

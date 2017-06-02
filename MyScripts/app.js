@@ -8,7 +8,8 @@ var app = angular.module('FtsApp',[
     'ui.grid',
     'ui.grid.selection',
     'ui.router',
-    'ngMaterial'
+    'ngMaterial',
+    'mdSteppers'
 ]);
 
 app.run(function ($rootScope) {

@@ -23,6 +23,26 @@
                             return undefined;
 
                     });
+            },
+
+            GetOrderByID: function (orderID) {
+
+                return $http.get('api/orders/order?orderID=' + orderID)
+                    .then(function (response) {
+
+                        return response.data;
+
+                    });
+
+            },
+
+            UpdateOrder: function (order) {
+                return $http.post('api/orders/updateOrder', {params: { order: order }})
+                    .then(function (response) {
+
+                        return response.data;
+
+                    });
             }
 
         }
