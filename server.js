@@ -5,7 +5,11 @@
 // set up ========================
 var express  = require('express');
 var app      = express();                               // create our app w/ express
-var mongoose = require('mongoose');                     // mongoose for mongodb
+//var Users = require('./DAL/User');                     // mongoose for mongodb
+
+var DAL = require('./DAL/DAL');                     // mongoose for mongodb
+
+
 var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
@@ -14,7 +18,12 @@ var path    = require("path");
 // configuration =================
 // 'mongodb://ronbiter:rb171290!@ftscluster-shard-00-00-pgdhp.mongodb.net:27017,ftscluster-shard-00-01-pgdhp.mongodb.net:27017,ftscluster-shard-00-02-pgdhp.mongodb.net:27017/admin?ssl=true&replicaSet=FTSCluster-shard-0&authSource=admin'
 // 'mongodb://ronbiter:rb171290@ds127101.mlab.com:27101/fts'
-mongoose.connect('mongodb://ronbiter:rb171290@ds127101.mlab.com:27101/fts');     // connect to mongoDB database on modulus.io
+// mongoose.connect('mongodb://ronbiter:rb171290@ds127101.mlab.com:27101/fts');     // connect to mongoDB database on modulus.io
+// mongoose.set('debug', true);
+//
+// mongoose.connection.on("open", function(){
+//     console.log("mongodb is connected!!");
+// });
 
 app.use(express.static(__dirname + '/'));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
@@ -25,14 +34,15 @@ app.use(methodOverride());
 
 app.set('view engine', 'html');
 
+
 // define models and schemas =================
 
 // =======================
 // schemas ===============
 // =======================
-var userSchema = new mongoose.Schema({ url: String, text: String, id: Number}, { collection: 'Users'})
-var fuelStationSchema = new mongoose.Schema({ url: String, text: String, id: Number}, { collection: 'FuelStations'})
-var ordersSchema = new mongoose.Schema({ url: String, text: String, id: Number}, { collection: 'Orders'})
+//var userSchema = new DAL.mongoose.Schema({ url: String, text: String, id: String}, { collection: 'Users'})
+var fuelStationSchema = new DAL.mongoose.Schema({ url: String, text: String, id: String}, { collection: 'FuelStations'})
+//var ordersSchema = new DAL.mongoose.Schema({ url: String, text: String, id: String}, { collection: 'Orders'})
 
 
 
@@ -40,9 +50,9 @@ var ordersSchema = new mongoose.Schema({ url: String, text: String, id: Number},
 // =======================
 // models ================
 // =======================
-var Users = mongoose.model('Users', userSchema);
-var FuelStations = mongoose.model('FuelStations', fuelStationSchema)
-var Orders = mongoose.model('Orders', ordersSchema)
+//var Users = DAL.mongoose.model('Users', userSchema);
+var FuelStations = DAL.mongoose.model('FuelStations', fuelStationSchema)
+//var Orders = DAL.mongoose.model('Orders', ordersSchema)
 
 
 
@@ -60,7 +70,7 @@ app.get('/', function (req, res) {
 // user login logic
 app.get('/api/User/Login', function (req, res) {
 
-    Users.find({
+    DAL.userModel.userModel.find({
         email: req.query.email,
         password: req.query.password
     }, function (err, users) {
@@ -142,7 +152,7 @@ app.get('/api/orders', function (req, res) {
     console.log("searching db for ordes");
 
     // use mongoose to get all orders in the database
-    Orders.find(function (err, orders) {
+    DAL.orderModel.orderModel.find(function (err, orders) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
@@ -161,7 +171,7 @@ app.get('/api/orders', function (req, res) {
 app.get('/api/orders/order', function (req, res) {
 
     var p = parseInt(req.query.orderID);
-    Orders.find({
+    DAL.orderModel.orderModel.find({
         orderID: p
     }, function (err, orders) {
 
@@ -189,25 +199,35 @@ app.get('/api/orders/order', function (req, res) {
 // update order
 app.post('/api/orders/updateOrder', function (req, res) {
     var p = req.body.params.order;
-    Orders.find({
-        orderID: p.orderID
-    }, function (err, orders) {
+    var conditions = { _id: p._id },
+        update = { priority: p.priority, status: p.status, lastUpdate: (new Date()).toDateString(), assignedTo: p.assignedTo };
+    console.log(update);
+    DAL.orderModel.orderModel.findByIdAndUpdate(
+        conditions,
+        update,
+        function (err, order) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
-            console.log(err)
-            res.send(err)
+            console.log(err);
+            res.send(err);
         }
-        console.log(orders.length)
-        // check we only got 1 order back
-        if(orders.length == 1) {
-            orders[0].priority = p.priority;
-            orders[0].status = p.status;
-            orders[0].lastUpdate = new Date();
-            orders[0].assignedTo = p.assignedTo;
-            //console.log(orders);
+        //console.log('updated order:');
+        //console.log(orders);
 
-            orders[0].save(function (err, updatedOrder) {
+
+        //check we only got 1 order back
+        if(order) {
+            console.log('order before change:');
+            console.log(order);
+            order.priority = p.priority;
+            order.status = p.status;
+            order.lastUpdate = new Date();
+            order.assignedTo = p.assignedTo;
+            console.log('order after change:');
+            console.log(order);
+
+            order.save(function (err, updatedOrder) {
                 if (err) {
                     console.log(err);
                     res.send(err);
@@ -229,7 +249,7 @@ app.get('/api/drivers', function (req, res) {
     console.log("searching db for drivers");
 
     // use mongoose to get all stations in the database
-    Users.find(
+    DAL.userModel.userModel.find(
         { role:'driver' },
         function (err, drivers) {
 

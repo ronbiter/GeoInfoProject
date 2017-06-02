@@ -66,8 +66,9 @@
 
          var routeMapState = {
             url: '/routeMap',
-                templateUrl: 'Views/navigation/routeMap/routeMap.html',
-                controller: 'routeMapController'
+            templateUrl: 'Views/navigation/routeMap/routeMap.html',
+            controller: 'routeMapController',
+             params: {stations: { Array: true} }
         };
 
         var loginState = {

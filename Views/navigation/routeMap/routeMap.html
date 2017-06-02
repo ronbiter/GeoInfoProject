@@ -1,16 +1,38 @@
 <div ng-init="LoadAllStations()">
     <h1 class="page-header">Route Map</h1>
 
+    <md-stepper id="stepper-route"
+                md-mobile-step-text="true"
+                md-vertical="false"
+                md-linear="true"
+                md-alternative="true">
+        <md-step ng-repeat="location in locations track by $index" md-label="{{location.name}}">
+            <md-step-body>
+                <p>{{location.street}}</p>
+            </md-step-body>
+            <md-step-actions>
+                <!--<md-button class="md-primary md-raised">Continue</md-button>-->
+                <!--<md-button class="md-primary">Cancel</md-button>-->
+            </md-step-actions>
+        </md-step>
+        <!-- Other steps if needed ... -->
+    </md-stepper>
+
+
+
     <div class="row">
         <div class="col-md-12">
-            <div id="myMap" class="map">
-            </div>
+            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center">
+                <div id="myMap" class="map">
+                </div>
+            </md-whiteframe>
+
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <button class="btn btn-lg btn-success" ng-click="navigate()">Navigate</button>
+            <md-button class="md-accent md-raised" ng-click="navigate()" ng-disabled="navigationStarted">Navigate</md-button>
 
         </div>
     </div>

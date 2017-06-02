@@ -6,7 +6,7 @@
 
     angular.module('FtsApp').controller('orderDetilsController', orderDetilsController);
 
-    function orderDetilsController ($scope, $stateParams, $location, ordersFactory, stationsFactory, userFactory) {
+    function orderDetilsController ($scope, $stateParams, $location, $state, ordersFactory, stationsFactory, userFactory) {
 
         // [TODO] continue the controller
 
@@ -64,6 +64,7 @@
 
         $scope.shipOutOrder = function () {
             console.log('order shipped');
+            $state.go('home.routeMap', { stations: $scope.orderStations })
         }
 
 
