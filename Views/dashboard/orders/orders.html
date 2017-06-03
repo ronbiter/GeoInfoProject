@@ -18,6 +18,7 @@
                         <th>Company</th>
                         <th>Priority</th>
                         <th>Status</th>
+                        <th>Assigned To</th>
                         <th>Last Updated</th>
                         <th></th>
                     </tr>
@@ -28,6 +29,7 @@
                         <td>{{order.company}}</td>
                         <td>{{order.priority}}</td>
                         <td>{{order.status}}</td>
+                        <td>{{order.assignedTo}}</td>
                         <td>{{order.lastUpdate}}</td>
                         <td>
                             <button class="btn btn-primary" ng-click="openOrder(order.orderID)">
