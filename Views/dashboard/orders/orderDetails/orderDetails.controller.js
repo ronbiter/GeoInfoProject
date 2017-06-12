@@ -64,7 +64,15 @@
 
         $scope.shipOutOrder = function () {
             console.log('order shipped');
+            $scope.selectedOrder.status = 'shipped';
+            ordersFactory.UpdateOrder($scope.selectedOrder)
+                .then(function (response) {
+                    console.log(response);
+
+                })
+            console.log('order shipped');
             $state.go('home.routeMap', { stations: $scope.orderStations })
+
         }
 
 

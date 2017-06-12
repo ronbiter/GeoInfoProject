@@ -9,7 +9,8 @@ var app = angular.module('FtsApp',[
     'ui.grid.selection',
     'ui.router',
     'ngMaterial',
-    'mdSteppers'
+    'mdSteppers',
+    'ngMessages'
 ]);
 
 app.run(function ($rootScope) {

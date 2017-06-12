@@ -184,7 +184,7 @@
 
                 $scope.curStep = 0;
                 $scope.numOfSteps = latlngList.length;
-                $timeout(simulateShipment, 4000);
+                $timeout(simulateShipment, 10000);
 
 
             });
@@ -196,7 +196,7 @@
                 //console.log('simulating step #' + $scope.curStep);
                 $scope.steppers.next();
                 $scope.curStep++;
-                $timeout(simulateShipment, 4000);
+                $timeout(simulateShipment, 10000);
             }
         }
 

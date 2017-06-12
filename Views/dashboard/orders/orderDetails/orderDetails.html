@@ -23,66 +23,72 @@
                 </div>
             </md-toolbar>
             <md-content layout-padding>
-                <form>
+                <form ng-submit="shipOutOrder()" name="orderDetailForm">
 
-                <div layout="row">
-                    <div layout="column" flex>
-                        <div layout="row" layout-padding layout-margin>
-                            <md-input-container class="form-group" flex>
-                                <label for="companyInput">Company</label>
-                                <input type="text" id="companyInput"
-                                       ng-model="selectedOrder.company" disabled>
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label for="lastUpdateInput">Last Update</label>
-                                <md-datepicker id="lastUpdateInput"
-                                               ng-model="selectedOrder.lastUpdate" disabled></md-datepicker>
-                            </md-input-container>
+                    <div layout="row">
+                        <div layout="column" flex>
+                            <div layout="row" layout-padding layout-margin>
+                                <md-input-container class="form-group" flex>
+                                    <label for="companyInput">Company</label>
+                                    <input type="text" id="companyInput"
+                                           ng-model="selectedOrder.company" disabled>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label for="lastUpdateInput">Last Update</label>
+                                    <md-datepicker id="lastUpdateInput"
+                                                   ng-model="selectedOrder.lastUpdate" disabled></md-datepicker>
+                                </md-input-container>
+                            </div>
+                            <div layout="row" layout-padding layout-margin>
+                                <md-input-container class="form-group" flex>
+                                    <label for="priorityInput">Priority</label>
+                                    <md-select type="text" id="priorityInput" required
+                                           ng-model="selectedOrder.priority" ng-disabled="!isEditOrder">
+                                        <md-option ng-repeat="priority in priorities" ng-value="priority.id">
+                                            {{priority.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label for="statusInput">Status</label>
+                                    <input id="statusInput" required
+                                           ng-model="selectedOrder.status" disabled/>
+                                </md-input-container>
+                            </div>
+                            <div layout="row" layout-padding layout-margin>
+                                <md-input-container flex="50">
+                                    <label for="assignedTo">Assigned To</label>
+                                    <input  id="assignedTo" name="assignedTo" ng-required="true"
+                                            ng-model="selectedOrder.assignedTo" disabled>
+                                    <div ng-messages="orderDetailForm.assignedTo.$error" multiple>
+                                        <div ng-message="required">
+                                            Please assign a driver to the shipment.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
                         </div>
-                        <div layout="row" layout-padding layout-margin>
-                            <md-input-container class="form-group" flex>
-                                <label for="priorityInput">Priority</label>
-                                <md-select type="text" id="priorityInput" required
-                                       ng-model="selectedOrder.priority" ng-disabled="!isEditOrder">
-                                    <md-option ng-repeat="priority in priorities" ng-value="priority.id">
-                                        {{priority.name}}
+                        <div layout="column" flex="30">
+                            <md-input-container flex="20">
+                                <label>Assign To</label>
+                                <md-select ng-model="selectedOrder.assignedTo"
+                                           ng-disabled="!isEditOrder">
+                                    <md-option ng-repeat="driver in drivers" ng-value="driver.userID">
+                                        {{driver.name}}
                                     </md-option>
                                 </md-select>
                             </md-input-container>
-                            <md-input-container flex>
-                                <label for="statusInput">Status</label>
-                                <input id="statusInput" required
-                                       ng-model="selectedOrder.status" disabled/>
-                            </md-input-container>
-                        </div>
-                        <div layout="row" layout-padding layout-margin>
-                            <md-input-container flex="50">
-                                <label for="assignedTo">Assigned To</label>
-                                <input  id="assignedTo" required
-                                        ng-model="selectedOrder.assignedTo" disabled>
-                            </md-input-container>
-                        </div>
-                    </div>
-                    <div layout="column" flex="30">
-                        <md-input-container flex="20">
-                            <label>Assign To</label>
-                            <md-select ng-model="selectedOrder.assignedTo"  ng-disabled="!isEditOrder">
-                                <md-option ng-repeat="driver in drivers" ng-value="driver.userId">
-                                    {{driver.name}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
-                        <md-button flex="20" type="submit" class="md-raised md-primary"
-                                   ng-if="selectedOrder.status=='review'" ng-click="confirmOrder()">
-                            Confirm
-                        </md-button>
-                        <md-button flex="20" type="submit" class="md-raised md-primary"
-                                   ng-if="selectedOrder.status=='confirmed'" ng-click="shipOutOrder()">
-                            Ship out
-                        </md-button>
+                            <md-button flex="20" class="md-raised md-primary"
+                                       ng-if="selectedOrder.status=='review'" ng-click="confirmOrder()">
+                                Confirm
+                            </md-button>
+                            <md-button flex="20" type="submit" class="md-raised md-primary"
+                                       ng-if="selectedOrder.status=='confirmed'" ng-disabled="orderDetailForm.$pristine|| orderDetailForm.$invalid">
+                                Ship out
+                            </md-button>
 
+                        </div>
                     </div>
-                </div>
                 </form>
 
                 <div layout="row" layout-padding>

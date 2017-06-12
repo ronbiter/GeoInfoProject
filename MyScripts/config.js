@@ -63,6 +63,11 @@
                 templateUrl: 'Views/navigation/GeneralMap/GeneralMap.html',
                 controller: 'generalMapController'
         };
+        var selectedStationState = {
+            url: '/station/:stationId',
+            templateUrl: 'Views/navigation/GeneralMap/GeneralMap.html',
+            controller: 'generalMapController'
+        };
 
          var routeMapState = {
             url: '/routeMap',
@@ -79,7 +84,6 @@
 
 
         $stateProvider
-            //.state('index', indexState)
             .state('home', homeState)
             .state('home.welcome', welcomeState)
             .state('home.dashboard', dashboardState)
@@ -87,6 +91,7 @@
             .state('home.dashboard.orders', ordersState)
             .state('home.dashboard.orders.order', selectedOrdersState)
             .state('home.generalMap', generalMapState)
+            .state('home.generalMap.station', selectedStationState)
             .state('home.routeMap', routeMapState)
             .state('home.login', loginState);
 

@@ -10,6 +10,7 @@ html {
 body {
     padding-top: 50px;
     padding-bottom: 25px;
+    height: auto;
 }
 
 footer {
