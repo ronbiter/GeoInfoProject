@@ -58,7 +58,7 @@
                             <div layout="row" layout-padding layout-margin>
                                 <md-input-container flex="50">
                                     <label for="assignedTo">Assigned To</label>
-                                    <input  id="assignedTo" name="assignedTo" required
+                                    <input  id="assignedTo" name="assignedTo" ng-required="true"
                                             ng-model="selectedOrder.assignedTo" disabled>
                                     <div ng-messages="orderDetailForm.assignedTo.$error" multiple>
                                         <div ng-message="required">

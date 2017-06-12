@@ -3,7 +3,7 @@
 
     angular.module('FtsApp').controller('stationsController', stationsController);
 
-    function stationsController($scope, stationsFactory) {
+    function stationsController($scope, $location, stationsFactory) {
 
         $scope.stationsList = [];
 
@@ -24,6 +24,8 @@
 
         $scope.GoToStation = function(stationId) {
             console.log('going to station #' + stationId);
+            $location.url('/home/generalMap/station/' + stationId);
+
         }
 
         // angular ui grid test...
